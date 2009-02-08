@@ -1,10 +1,8 @@
-// WebCam.cpp : Defines the entry point for the console application.
-//
+#include <common.h>
+#include <Socket.h>
 
-#include "stdafx.h"
-
-#include "cv.h"
-#include "highgui.h"
+#include <cv.h>
+#include <highgui.h>
 
 // r,g,b values are from 0 to 1
 // h = [0,360], s = [0,1], v = [0,1]
@@ -41,6 +39,29 @@ void RGBtoHSV( float r, float g, float b, float *h, float *s, float *v )
 		*h += 360;
 }
 
+void drawCross(IplImage *frame, int x, int y, int size, int width)
+{
+    unsigned char* pSrcPixels = (unsigned char*)frame->imageData;
+    for(int j = x - width; j <= x+width; j++)
+    for(int i = y - size; i <= y + size; i++)
+    {
+        int PixelOffset = i*frame->widthStep + j*3;
+        pSrcPixels[PixelOffset] = 0;
+        pSrcPixels[PixelOffset+1] = 255;
+        pSrcPixels[PixelOffset+2] = 0;
+    }
+
+    for(int j = y - width; j <= y + width; j++)
+    for(int i = x - size; i <= x + size; i++)
+    {
+        int PixelOffset = j*frame->widthStep + i*3;
+        pSrcPixels[PixelOffset] = 0;
+        pSrcPixels[PixelOffset+1] = 255;
+        pSrcPixels[PixelOffset+2] = 0;
+    }
+
+}
+
 int main(int argc, char* argv[])
 {
     CvCapture* capture = 0;
@@ -64,8 +85,17 @@ int main(int argc, char* argv[])
                                     IPL_DEPTH_8U, frame->nChannels );
         frame_InterestAreas = cvCreateImage( cvSize(frame->width,frame->height),
                                     IPL_DEPTH_8U, frame->nChannels );
+
+        int minH = 80;
+        int minS = 156;
+        int rangeH = 46;
+
         for(;;)
         {
+            int totalX = 0;
+            int nr = 0;
+            int totalY = 0;
+
             if( !cvGrabFrame( capture ))
                 break;
             frame = cvRetrieveFrame( capture );
@@ -93,6 +123,10 @@ int main(int argc, char* argv[])
 */					//rgb to hsv
 					float fh, fs, fv;
 					RGBtoHSV(r/255.f, g/255.f, b/255.f, &fh, &fs, &fv);
+
+                    //RGBtoHSV(0.8, 0.18, 0.12, &fh, &fs, &fv);
+
+
 					unsigned char h = (unsigned char)(fh*255/360);
 					unsigned char s = (unsigned char)(fs*255);
 					unsigned char v = (unsigned char)(fv*255);
@@ -105,8 +139,13 @@ int main(int argc, char* argv[])
 					pSaturationPixels[PixelOffset+2] = s;
 					
 					int InterestValue;
-					if (s > 150 && (h > 170 && h < 185))
+					if (s > minS && (h > minH && h < minH + rangeH))
+                    {
+                        totalX += col;
+                        totalY += line;
+                        nr++;
 						InterestValue = 255;
+                    }
 					else
 						InterestValue = 0;
 					pInterestAreasPixels[PixelOffset] = InterestValue;
@@ -119,20 +158,36 @@ int main(int argc, char* argv[])
 					pHuePixels[PixelOffset+1] = gray;
 					pHuePixels[PixelOffset+2] = gray;
 */				}
-          
 
+            int cx = totalX / nr;
+            int cy = totalY / nr;
+
+            drawCross(frame_InterestAreas, cx, cy, 50, 1);
+          
 			//IplImage* gray = cvCreateImage( cvSize(frame_copy->width,frame_copy->height), 8, 1 );
 			//cvCvtColor( frame_copy, gray, CV_BGR2GRAY );
-            cvFlip( frame, frame, 0 );
+            cvFlip( frame, frame, -1 );
+            cvFlip( frame_InterestAreas, frame_InterestAreas, 1 );
 			cvShowImage( "Color", frame );
 			cvShowImage( "Hue", frame_Hue );
 			cvShowImage( "Saturation", frame_Saturation );
 			cvShowImage( "Interest Areas", frame_InterestAreas );
 			//cvReleaseImage( &gray );
+            
 
-
-            if( cvWaitKey( 10 ) >= 0 )
-                break;
+            int key = cvWaitKey( 10 );
+            if(key >= 0)
+            {
+                switch(key) {
+                    case 'a': minS--; break;
+                    case 's': minS++; break;
+                    case 'q': minH--; break;
+                    case 'w': minH++; break;
+                    case 'z': rangeH--; break;
+                    case 'x': rangeH++; break;    
+                }
+                //break;
+            }
         }
 
         cvReleaseImage( &frame_Hue );
@@ -148,4 +203,3 @@ int main(int argc, char* argv[])
 	
 	return 0;
 }
-

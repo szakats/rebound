@@ -12,13 +12,14 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="Debug"
-			IntermediateDirectory="Debug"
+			OutputDirectory="../../bin"
+			IntermediateDirectory="../../bin/Debug"
 			ConfigurationType="1"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
+				AdditionalIncludeDirectories="D:\rebound\rebound\common\include;D:\rebound\rebound\net\include;D:\rebound\rebound\opencv\include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
@@ -31,8 +32,10 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="cv.lib cxcore.lib highgui.lib ws2_32.lib"
 				OutputFile="$(OutDir)/rebound.exe"
 				LinkIncremental="2"
+				AdditionalLibraryDirectories="D:\rebound\rebound\opencv\lib"
 				GenerateDebugInformation="TRUE"
 				ProgramDatabaseFile="$(OutDir)/rebound.pdb"
 				SubSystem="1"
@@ -109,22 +112,92 @@
 	</References>
 	<Files>
 		<Filter
-			Name="Source Files"
-			Filter="cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx"
-			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}">
-			<File
-				RelativePath="..\..\src\main.cpp">
-			</File>
+			Name="net"
+			Filter="">
+			<Filter
+				Name="src"
+				Filter="">
+				<File
+					RelativePath="..\..\net\src\net.cpp">
+				</File>
+				<File
+					RelativePath="..\..\net\src\Socket.cpp">
+				</File>
+			</Filter>
+			<Filter
+				Name="include"
+				Filter="">
+				<File
+					RelativePath="..\..\net\include\net.h">
+				</File>
+				<File
+					RelativePath="..\..\net\include\Socket.h">
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
-			Name="Header Files"
-			Filter="h;hpp;hxx;hm;inl;inc;xsd"
-			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}">
+			Name="common"
+			Filter="">
+			<Filter
+				Name="include"
+				Filter="">
+				<File
+					RelativePath="..\..\common\include\common.h">
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
-			Name="Resource Files"
-			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx"
-			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}">
+			Name="opencv"
+			Filter="">
+			<Filter
+				Name="include"
+				Filter="">
+				<File
+					RelativePath="..\..\opencv\include\cv.h">
+				</File>
+				<File
+					RelativePath="..\..\opencv\include\cv.hpp">
+				</File>
+				<File
+					RelativePath="..\..\opencv\include\cvcompat.h">
+				</File>
+				<File
+					RelativePath="..\..\opencv\include\cvtypes.h">
+				</File>
+				<File
+					RelativePath="..\..\opencv\include\cvver.h">
+				</File>
+				<File
+					RelativePath="..\..\opencv\include\cxcore.h">
+				</File>
+				<File
+					RelativePath="..\..\opencv\include\cxcore.hpp">
+				</File>
+				<File
+					RelativePath="..\..\opencv\include\cxerror.h">
+				</File>
+				<File
+					RelativePath="..\..\opencv\include\cxtypes.h">
+				</File>
+				<File
+					RelativePath="..\..\opencv\include\highgui.h">
+				</File>
+			</Filter>
+		</Filter>
+		<Filter
+			Name="game"
+			Filter="">
+			<Filter
+				Name="src"
+				Filter="">
+				<File
+					RelativePath="..\..\game\src\main.cpp">
+				</File>
+			</Filter>
+			<Filter
+				Name="include"
+				Filter="">
+			</Filter>
 		</Filter>
 	</Files>
 	<Globals>
