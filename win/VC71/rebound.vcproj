@@ -19,7 +19,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="D:\rebound\rebound\common\include;D:\rebound\rebound\net\include;D:\rebound\rebound\opencv\include"
+				AdditionalIncludeDirectories="D:\rebound\rebound\common\include;D:\rebound\rebound\net\include;D:\rebound\rebound\opencv\include;D:\rebound\rebound\game\include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
@@ -142,6 +142,9 @@
 				Name="include"
 				Filter="">
 				<File
+					RelativePath="..\..\common\include\Callback.h">
+				</File>
+				<File
 					RelativePath="..\..\common\include\common.h">
 				</File>
 			</Filter>
@@ -191,12 +194,24 @@
 				Name="src"
 				Filter="">
 				<File
+					RelativePath="..\..\game\src\Game.cpp">
+				</File>
+				<File
 					RelativePath="..\..\game\src\main.cpp">
+				</File>
+				<File
+					RelativePath="..\..\game\src\WebCamController.cpp">
 				</File>
 			</Filter>
 			<Filter
 				Name="include"
 				Filter="">
+				<File
+					RelativePath="..\..\game\include\Controller.h">
+				</File>
+				<File
+					RelativePath="..\..\game\include\Game.h">
+				</File>
 			</Filter>
 		</Filter>
 	</Files>
