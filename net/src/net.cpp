@@ -17,6 +17,8 @@
 we'll just have two completely different sections here.
 */
 
+#include "common.h"
+
 #include "net.h"
 #include <string>
 

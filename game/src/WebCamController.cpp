@@ -1,8 +1,6 @@
-#include <common.h>
-#include <Controller.h>
+#include "common.h"
 
-#include <cv.h>
-#include <highgui.h>
+#include <Controller.h>
 
 // r,g,b values are from 0 to 1
 // h = [0,360], s = [0,1], v = [0,1]

@@ -1,16 +1,18 @@
-/*
-*/
+// STL includes
+#include <map>
+#include <set>
+#include <vector>
+#include <algorithm>
+#include <string>
 
-#ifndef __COMMON_H_
-#define __COMMON_H_
+// platform related includes
+#include "platform.h"
+#include <windows.h>
 
-typedef __int64            int64;
-typedef long               int32;
-typedef short              int16;
-typedef char               int8;
-typedef unsigned __int64   uint64;
-typedef unsigned long      uint32;
-typedef unsigned short     uint16;
-typedef unsigned char      uint8;
+// OSG includes
+//#pragma warning(disable:4541)
+#include <osgViewer/Viewer>
 
-#endif // __COMMON_H_
+// OpenCV includes
+#include <cv.h>
+#include <highgui.h>

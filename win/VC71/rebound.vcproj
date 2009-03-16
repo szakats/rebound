@@ -12,34 +12,38 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="../../bin"
+			OutputDirectory="../../bin/Debug"
 			IntermediateDirectory="../../bin/Debug"
 			ConfigurationType="1"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="D:\rebound\rebound\common\include;D:\rebound\rebound\net\include;D:\rebound\rebound\opencv\include;D:\rebound\rebound\game\include"
-				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
+				AdditionalIncludeDirectories="..\..\common\include;..\..\net\include;..\..\opencv\include;..\..\game\include;&quot;..\..\..\OpenSceneGraph-2.8.0-rc2\include&quot;;&quot;..\..\..\OpenSceneGraph-2.8.0-rc2\build\include&quot;;&quot;D:\rebound\osgal-0.6.1\include&quot;;D:\rebound\openal\OpenAL\include;&quot;D:\rebound\openal\freealut-1.1.0-src\include&quot;;&quot;D:\rebound\openal\freealut-1.1.0-src\include\AL&quot;;&quot;D:\rebound\vorbis\libvorbis-1.2.0\include&quot;;&quot;D:\rebound\ogg\libogg-1.1.3\include&quot;"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
-				RuntimeLibrary="5"
-				UsePrecompiledHeader="0"
+				RuntimeLibrary="1"
+				RuntimeTypeInfo="TRUE"
+				UsePrecompiledHeader="3"
+				PrecompiledHeaderThrough="common.h"
+				PrecompiledHeaderFile=""
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="TRUE"
-				DebugInformationFormat="4"/>
+				DebugInformationFormat="3"/>
 			<Tool
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="cv.lib cxcore.lib highgui.lib ws2_32.lib"
+				AdditionalDependencies="cv.lib cxcore.lib highgui.lib ws2_32.lib osgd.lib osgViewerd.lib osgGAd.lib osgTextd.lib osgALd.lib oalppd.lib"
 				OutputFile="$(OutDir)/rebound.exe"
-				LinkIncremental="2"
-				AdditionalLibraryDirectories="D:\rebound\rebound\opencv\lib"
+				LinkIncremental="1"
+				AdditionalLibraryDirectories="..\..\opencv\lib;&quot;..\..\..\OpenSceneGraph-2.8.0-rc2\build\lib&quot;;&quot;D:\rebound\osgal-0.6.1\lib&quot;"
 				GenerateDebugInformation="TRUE"
 				ProgramDatabaseFile="$(OutDir)/rebound.pdb"
-				SubSystem="1"
-				TargetMachine="1"/>
+				SubSystem="2"
+				TargetMachine="1"
+				FixedBaseAddress="1"/>
 			<Tool
 				Name="VCMIDLTool"/>
 			<Tool
@@ -63,15 +67,19 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="Release"
-			IntermediateDirectory="Release"
+			OutputDirectory="../../bin/Release"
+			IntermediateDirectory="../../bin/Release"
 			ConfigurationType="1"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
-				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
-				RuntimeLibrary="4"
-				UsePrecompiledHeader="0"
+				AdditionalIncludeDirectories="..\..\common\include;..\..\net\include;..\..\opencv\include;..\..\game\include;&quot;..\..\..\OpenSceneGraph-2.8.0-rc2\include&quot;;&quot;..\..\..\OpenSceneGraph-2.8.0-rc2\build\include&quot;;&quot;D:\rebound\osgal-0.6.1\include&quot;;D:\rebound\openal\OpenAL\include;&quot;D:\rebound\openal\freealut-1.1.0-src\include&quot;;&quot;D:\rebound\openal\freealut-1.1.0-src\include\AL&quot;;&quot;D:\rebound\vorbis\libvorbis-1.2.0\include&quot;;&quot;D:\rebound\ogg\libogg-1.1.3\include&quot;"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS"
+				RuntimeLibrary="0"
+				RuntimeTypeInfo="TRUE"
+				UsePrecompiledHeader="3"
+				PrecompiledHeaderThrough="common.h"
+				PrecompiledHeaderFile=""
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="TRUE"
 				DebugInformationFormat="3"/>
@@ -79,10 +87,12 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="cv.lib cxcore.lib highgui.lib ws2_32.lib osg.lib osgViewer.lib osgGA.lib osgText.lib"
 				OutputFile="$(OutDir)/rebound.exe"
 				LinkIncremental="1"
+				AdditionalLibraryDirectories="..\..\opencv\lib;&quot;..\..\..\OpenSceneGraph-2.8.0-rc2\build\lib&quot;"
 				GenerateDebugInformation="TRUE"
-				SubSystem="1"
+				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
 				TargetMachine="1"/>
@@ -142,10 +152,44 @@
 				Name="include"
 				Filter="">
 				<File
-					RelativePath="..\..\common\include\Callback.h">
+					RelativePath="..\..\common\include\common.h">
 				</File>
 				<File
-					RelativePath="..\..\common\include\common.h">
+					RelativePath="..\..\common\include\Event.h">
+				</File>
+				<File
+					RelativePath="..\..\common\include\EventScheduler.h">
+				</File>
+				<File
+					RelativePath="..\..\common\include\platform.h">
+				</File>
+				<File
+					RelativePath="..\..\common\include\Singleton.h">
+				</File>
+			</Filter>
+			<Filter
+				Name="src"
+				Filter="">
+				<File
+					RelativePath="..\..\common\include\common.cpp">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							UsePrecompiledHeader="1"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							UsePrecompiledHeader="1"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\common\src\Event.cpp">
+				</File>
+				<File
+					RelativePath="..\..\common\src\EventScheduler.cpp">
 				</File>
 			</Filter>
 		</Filter>
@@ -194,23 +238,59 @@
 				Name="src"
 				Filter="">
 				<File
-					RelativePath="..\..\game\src\Game.cpp">
+					RelativePath="..\..\game\src\Ball.cpp">
+				</File>
+				<File
+					RelativePath="..\..\game\src\GameModel.cpp">
+				</File>
+				<File
+					RelativePath="..\..\game\src\GameWindow.cpp">
 				</File>
 				<File
 					RelativePath="..\..\game\src\main.cpp">
 				</File>
 				<File
+					RelativePath="..\..\game\src\MainMenu.cpp">
+				</File>
+				<File
+					RelativePath="..\..\game\src\Menu.cpp">
+				</File>
+				<File
+					RelativePath="..\..\game\src\NetHandler.cpp">
+				</File>
+				<File
 					RelativePath="..\..\game\src\WebCamController.cpp">
+				</File>
+				<File
+					RelativePath="..\..\game\src\Window.cpp">
+				</File>
+				<File
+					RelativePath="..\..\game\src\WindowManager.cpp">
 				</File>
 			</Filter>
 			<Filter
 				Name="include"
 				Filter="">
 				<File
+					RelativePath="..\..\game\include\Ball.h">
+				</File>
+				<File
 					RelativePath="..\..\game\include\Controller.h">
 				</File>
 				<File
-					RelativePath="..\..\game\include\Game.h">
+					RelativePath="..\..\game\include\GameModel.h">
+				</File>
+				<File
+					RelativePath="..\..\game\include\GameWindow.h">
+				</File>
+				<File
+					RelativePath="..\..\game\include\Menu.h">
+				</File>
+				<File
+					RelativePath="..\..\game\include\Window.h">
+				</File>
+				<File
+					RelativePath="..\..\game\include\WindowManager.h">
 				</File>
 			</Filter>
 		</Filter>
